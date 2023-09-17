@@ -1,0 +1,133 @@
+// Urnukh Tsogt 
+// URT633 
+// 11267557
+//
+// Mitchell Risling 
+// MJR810 
+// 11221612
+//
+// CMPT332
+// a01-phase01
+// 09:00, 19/09/2022 
+//
+// Design doc for Part A
+
+//
+// general flow of programs:
+//
+our parent thread will always be run from the same file. 
+dependent on os it will create the thread using the 
+appropriate createThread[win|ubc|pos|uni].c
+
+the parent thread will: 
+	create global[thread] sized array initialized to all zeros to store 
+	each of the threads count of calls to fib. 
+	create global int for threads to check to see if still time to do next fib
+	loop [threads] time and create threads with instructions 
+to calculate up to fib[n] or until value 	of int is 0
+	sleep for [deadline] seconds
+	wake up and change int so threads know times up
+
+each child thread will
+	create a count = 1
+	get system time and store in startTime
+	loop while parents int is 1 or count <= [size]
+	call fib(local count, &parentArray[threadID])
+	increment count
+	
+	print curSystemTime - startTime
+	print globalArray[threadid]
+
+
+//
+// shared files
+//
+
+//check input.c functions related to validating user input
+contains one function
+checkValidInput( threads, time, n / size ):
+ precond: arguments given
+ postcond: none
+ return: bool whether the inputs are valid or not
+check whether the arguments given on the command line are valid
+
+//calc_fib.c file containing stuff related to calculating fibs
+contains two functions:
+Fib( n ):
+	increment global array[threadID] calculate fib n 
+	precond: global array set 
+	postcond: global array incremented calls to fib times 
+	return: fib number of n
+
+	updates count of calls to fib then does basic recursive fib formula
+	on exit prints elapsed time since child began, // of fib invocations
+
+callFib( void *n))
+	wrapper for call fib so that posix and windows stop getting mad at me for 
+	trying to pass fib() to them
+	will use this to handle the printing of results and what not
+
+//create_threads.c file containing functions related to the platform 	
+	specific thread creation.
+contains four function:
+int createWINThread( n )
+	create a windows thread to calculate fib up to n
+	precond: global array set
+	postcond: global array is updated at each index by individual threads
+	return: 0 if successful, 1 if not
+//createUBCThread() 
+createPOSIXThread( n, func )
+	create a pthread thread to calculate fib up to n
+	precond: global array set
+	postcond: new pthreadis created and begins calculated func up to n 
+						starting at one
+	return: threadID (this will probablt be changed for next 
+	part to an uinteger and handle error in main.)
+// createUNIXThread
+
+
+
+//
+// A.1 Windows Threads
+//
+
+// main_a1.c main file for part A1 
+contains one function:
+main(argc argv):
+	checks user input
+	checks user os and architecture
+		exits if inappropriate for program 
+	creates and sets a boolean variable keepRunning
+	creates a global array fibCounts initialized to zeroes 
+	loops [thread] times
+			createWINThread( n, fib )
+		sleeps for [deadline] seconds
+		wakes up and sets keepRunning to 0
+
+
+//
+// A.2 UBC Threads
+//
+
+//
+// A.3 POSIX Threads
+// 
+
+main_a3.c main file for part A3 
+contains one function:
+main(argc argv):
+	checks user input
+	checks user os and architecture
+		exits if inappropriate for program 
+	creates and sets a boolean variable keepRunning
+	creates a global array fibCounts initialized to zeroes 
+	loops [thread] times
+			createPOSIXThread( n, fib )
+		sleeps for [deadline] seconds
+		wakes up and sets keepRunning to 0
+		
+//
+// A.4 UNIX processes -  BONUS
+//
+
+

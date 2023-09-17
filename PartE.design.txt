@@ -1,0 +1,53 @@
+ /*
+ Urnukh Tsogt
+ URT633
+ 11267557
+
+ Mitchell Risling
+ MJR810
+ 11221612
+
+ CMPT332
+ a01-phase01
+ 09:00, 19/09/2022
+ */
+
+ program will run in a never ending loop.
+    - ask user for input
+    - take input one digit ata time. dynamically alocate space and store it
+    - when enter is hit, pass it to a tokenizer to parse and put string into
+    an array of strings based on white spaces in the input
+    - based on what is able to be parsed either
+        - find and execute the command
+        - let the user the command cannot be found
+        - or let the user know the file is not executable
+    - break out of loop and exit program when "exit" is entered
+ - need to implement build in cd
+ - need to implement ability to handle one pipe of cmd into another
+
+
+
+
+
+// FILES
+
+// partE_shell_main.c
+// mainfile for partE
+this file will host the main loop that constantly calls the final product
+until enter is entered
+
+
+
+// partE_shell_get_input.c
+// handles everything related to getting and parsing the input from user
+has fucntions:
+    char *getInput(): gets input from the user one char at a time. starts with
+    a buffer of 256 chars, and either doubles it or adds 256 more to the space
+    when the limit is hit. not sure what i plan on doing. returns a pointer
+    to char array of the string the user has entered
+
+    char **parseInput( char *input ): allocates for a new char** array
+    and then runs through *input and tonkenizes it into char** based on the
+    white space in input. need to check for '|' and any other special chars
+    like backslashes that may change the way the input is to be interperetted
+    and handle appropriately.

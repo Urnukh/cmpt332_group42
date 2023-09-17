@@ -1,0 +1,63 @@
+# Urnukh Tsogt 
+# URT633 
+# 11267557
+#
+# Mitchell Risling 
+# MJR810 
+# 11221612
+#
+# CMPT332
+# a01-phase02
+# 09:00, 26/09/2022 
+
+# partA test results
+
+Running Tests...
+
+testing file: check_input.c
+
+testing checkValidArgNumber( int argc )...
+	testing argc = 4...
+	testing argc = 0...
+	testing argc = -1...
+	testing argc = -3...
+	testing argc = 100...
+	testing argc = 3...
+all checkValidArgNumber tests passed
+
+testing checkValidInput( char* char* char*)...
+	with 123 69 420...
+	with -2 69 420..
+	with -1 69 420..
+	with 0 69 420..
+	with 2 69 420..
+	with 3 69 420..
+	with 4 69 420..
+	with 509 69 420..
+	with 510 69 420..
+	with 511 69 420..
+	with 512 69 420..
+	with 513 69 420..
+	with 514 69 420..
+	with 50, -2 420..
+	with 50, -1 420..
+	with 50, 0 420..
+	with 50 2 420..
+	with 50 3 420..
+	with 50 4 420..
+	with 50 9997 420..
+	with 50 9998 420..
+	with 50 10000 420..
+test 26 failed - checkValidInput( 50 10000 420 )
+	with 50 10001 420..
+test 027 failed - checkValidInput( 50 10001 420 )
+	with 50 10002 420..
+test 028 failed - checkValidInput( 50 10002 420 )
+	with 50 10003 420..
+test 029 failed - checkValidInput( 50 10003 420 )
+Failed Tests:
+	test 26 failed
+	test 27 failed
+	test 28 failed
+3 tests failed!
+

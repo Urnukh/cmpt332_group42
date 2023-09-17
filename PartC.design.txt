@@ -1,0 +1,74 @@
+# Urnukh Tsogt
+# URT633
+# 11267557
+#
+# Mitchell Risling
+# MJR810
+# 11221612
+#
+# CMPT332
+# a01-phase03
+
+------------------ type Structute definitions ------------------
+
+----- ListInitFlag struct -----
+A type has a bool parameter to indicate if the memory allocation for Nodes and Lists is complete
+
+struct ListInitFlag{
+    bool flag;
+};
+
+----- Internal Node struct -----
+A type that is internal to the list.
+struct Node{
+    void* data;
+    int idxMemory;                  # An index to Array of Nodes that is stored in NodeMemory type
+    struct NodeMemory* nodePool;    # A pointer to Array of Nodes(node pool)
+    struct Node* nextNode;          # a pointer to previous and next nodes(List internal)
+    struct Node* prevNode;
+};
+
+----- NodeMemory struct -----
+struct NodeMemory{
+    int currFree;                     # Number free array locations(increment or decremented by each add or remove operation)
+    int currOcc;                      # Number of currently occupied
+    int idxCurrFree;                  # An index to current(first available) free array location
+    int idxCurrOcc;                   # An inddex to current occupied array location
+    struct Node nodePool[NODE_SIZE];  # An array of nodes aka Pool of Nodes
+}
+
+----- List struct -----
+struct List{
+    struct Node* firstElement;        # A pointer to the first element of the list
+    struct Node* lastElement;         # A pointer to the last element of the list
+    struct NodeMemory* ptrNodePool;   # A pointer to the Pool of Nodes
+    int idxMemory;                    # An index to Array of Lists
+    int numEl;                        # Number of elements in List
+    int maxEl;                        # Maximum number of elements
+    int idxCurEl;                     # index/ count of current element
+    struct Node* prevEl;              # a pointer to Previous element(List internal different from Node )
+    struct Node* nextEl;              # a pointer to Next element of List
+    struct Node* curEl;               # a pointer to Current element of the list
+};
+
+
+----- ListMemory struct -----
+struct ListMemory{
+    int currOcc;                      # Number of occupied elements in an Array of Lists
+    int currFree;                     # Number of free locations for in an Array of ListSearch
+    int idxCurrFree;                  # Index to first available free spot in an array
+    int idxCurrOcc;                   # Index to last occupied spot in an array
+    struct List listPool[LIST_SIZE];  # An array of struct List
+};
+
+------------------ General flow of the program ------------------
+
+
+**** It is required to be DECLARED following 3 type objects in main() ****
+- Declare ListInitFlag type object(through out the prog only ONE(1) type object is allowed)
+- Declare ListMemory type object
+- Declare NodeMemory type object
+
+void listInitFlag(): ListInit method MUST be called before any List creation and doing operations on List
+
+After this function call rest of the methods are good to be called as long as it has function arguments

@@ -1,0 +1,87 @@
+# Urnukh Tsogt 
+# URT633 
+# 11267557
+#
+# Mitchell Risling 
+# MJR810 
+# 11221612
+#
+# CMPT332
+# a01-phase02
+# 09:00, 26/09/2022 
+
+# partA test plan. 
+
+# for the whole of A
+check running make with all targets on different OS's to show that makefile
+bashscript that make and run the application are only compiling the proper
+stuff in the each scenario that can be thrown at it 
+on windows: all - only part one
+												- print a message if they are on windows and run 
+												something other then make clean or all
+on linux : all - all other parts
+												- print message if on linux and try to run make part1
+
+bash script:
+test bash script and calling from command line with same, small set of args to 
+test that both the bash script and the input checkers are both validating 
+input properly and printing proper messages on invalid input
+
+#
+# check_input.c
+#
+# int checkValidArgNumber( int argc ):
+	test with argc = 
+ -2,-1,0,1:		near valid, below, zero, and a couple negative vals
+				 2:		one below valid val
+				 3:		at valid
+	   4,5,6:		one above, and near valid
+		 	 100:		way above valid
+
+# int checkValidInput( char *threads, char *time, char *n )
+	test with threads, char, n:
+	-2,-1,0: 		couple negative, near valid , 1 below valid
+				1:		minimum valid value
+		2,3,4:		couple just above valid
+
+will also need to test threads at 512, and others near their max values once
+i determine what they wiill be 
+
+#
+# calc_fib.c
+#
+# fib( n )
+	-2, -1, 0:	same as above
+					1: min value
+					2: one above min
+				 10: valid
+				 30: large valid
+
+test with keepRunning set to false at start to see it never recurses in fib
+test switching keepRunning to false at different times to check that 
+fib stops recursing after current call is finished
+
+test with threads array index uninitialized.
+
+test with multiple threads to ensure that each only updates their own array index
+
+#callFib(void)
+not much to do witht his one, calls fib and stores the answer in a result
+run callFib with same tests as fib and see that results are the same
+
+#
+# create_threads.c
+#
+
+not much to be tested here. mostly wrappers for the specific functions to
+create threads with the different libs. unfortunately i cant compile anything 
+on win so i vant test or finish :(
+
+
+#
+# main
+#
+
+the mains put all the tested pieces together. should be able to run many of the same
+tests and just see the the output is the me
+will just need to add a couple so all of it is tested and it should be good
